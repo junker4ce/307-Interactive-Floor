@@ -32,7 +32,7 @@ namespace CMPUT302
 
         private void setCoordinate2Click(object sender, RoutedEventArgs e)
         {
-            Joint LeftFoot = App.mainSkeleton.Joints[JointType.FootLeft];
+            Joint LeftFoot = Calibration.mainSkeleton.Joints[JointType.FootLeft];
             if (LeftFoot == null) { }
             else
             {

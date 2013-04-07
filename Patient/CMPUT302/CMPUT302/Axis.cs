@@ -9,7 +9,7 @@ namespace CMPUT302
     //work in progress
     public class Axis
     {
-        double distance;
+        public double distance;
         public Point zero;
         public Point max;
 

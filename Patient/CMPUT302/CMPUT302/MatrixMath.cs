@@ -49,23 +49,23 @@ namespace CMPUT302
             return Dfull / denom;
         }
 
-        public static double distance(Point foot, Axis axis)
-        {
-            Point c = pointSub(axis.max, axis.zero);
-            Point a = pointSub(foot, axis.zero);
-            Point b = pointSub(foot, axis.max);
-            Point num = crossProduct(a, b);
-            return vectorval(num) / vectorval(c);
-        }
+        //public static double distance(Point foot, Axis axis)
+        //{
+        //    Point c = pointSub(axis.max, axis.zero);
+        //    Point a = pointSub(foot, axis.zero);
+        //    Point b = pointSub(foot, axis.max);
+        //    Point num = crossProduct(a, b);
+        //    return vectorval(num) / vectorval(c);
+        //}
 
-        public static void finalizeGrid()
-        {
-            .xaxis.distance = distance(App.xaxis.max, App.yaxis);
-            .xaxis.resolution = App.XPIXEL;
-            App.yaxis.distance = distance(App.yaxis.max, App.xaxis);
-            App.yaxis.resolution = App.YPIXEL;
-            return;
-        }
+        //        public static void finalizeGrid()
+        //        {
+        //            .xaxis.distance = distance(App.xaxis.max, App.yaxis);
+        //            .xaxis.resolution = App.XPIXEL;
+        //            App.yaxis.distance = distance(App.yaxis.max, App.xaxis);
+        //            App.yaxis.resolution = App.YPIXEL;
+        //            return;
+        //        }
 
         public static Point jointToPoint(Joint joint)
         {
@@ -75,33 +75,35 @@ namespace CMPUT302
             transpoint.z = joint.Position.Z;
             return transpoint;
         }
-
-        private static Point pointSub(Point a, Point b)
-        {
-            Point sub = new Point();
-            sub.x = a.x - b.x;
-            sub.y = a.y - b.y;
-            sub.z = a.z - b.z;
-            return sub;
-        }
-
-        private static double vectorval(Point point)
-        {
-            return Math.Sqrt(Math.Pow(point.x, 2.0) + Math.Pow(point.y, 2.0) + Math.Pow(point.z, 2.0));
-        }
-
-        private static Point crossProduct(Point a, Point b)
-        {
-            Point product = new Point();
-            product.x = ((a.y * b.z) - (a.z * b.y));
-            product.y = ((a.z * b.x) - (a.x * b.z));
-            product.z = ((a.x * b.y) - (a.y * b.x));
-            return product;
-        }
-
-        public static int distToRes(double dist, Axis axis)
-        {
-            return Convert.ToInt32((axis.resolution * dist) / axis.distance);
-        }
     }
 }
+
+//        private static Point pointSub(Point a, Point b)
+//        {
+//            Point sub = new Point();
+//            sub.x = a.x - b.x;
+//            sub.y = a.y - b.y;
+//            sub.z = a.z - b.z;
+//            return sub;
+//        }
+
+//        private static double vectorval(Point point)
+//        {
+//            return Math.Sqrt(Math.Pow(point.x, 2.0) + Math.Pow(point.y, 2.0) + Math.Pow(point.z, 2.0));
+//        }
+
+//        private static Point crossProduct(Point a, Point b)
+//        {
+//            Point product = new Point();
+//            product.x = ((a.y * b.z) - (a.z * b.y));
+//            product.y = ((a.z * b.x) - (a.x * b.z));
+//            product.z = ((a.x * b.y) - (a.y * b.x));
+//            return product;
+//        }
+
+//        public static int distToRes(double dist, Axis axis)
+//        {
+//            return Convert.ToInt32((axis.resolution * dist) / axis.distance);
+//        }
+//    }
+//}
