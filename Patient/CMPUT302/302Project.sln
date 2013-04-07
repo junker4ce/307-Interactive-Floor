@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteractiveFloor", "CMPUT414\InteractiveFloor.csproj", "{07DA2BB9-75D4-43AA-8491-896A6F98C84F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteractiveFloorGame", "..\InteractiveFloorGame\WindowsFormsApplication1\InteractiveFloorGame.csproj", "{9AF3061E-5BDF-45C4-9460-627537DA7327}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AC362E94-44FF-4E1A-8F9C-E53152BEEF61}"
+	ProjectSection(SolutionItems) = preProject
+		302Project.suo = 302Project.suo
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{07DA2BB9-75D4-43AA-8491-896A6F98C84F}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{07DA2BB9-75D4-43AA-8491-896A6F98C84F}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{07DA2BB9-75D4-43AA-8491-896A6F98C84F}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{07DA2BB9-75D4-43AA-8491-896A6F98C84F}.Debug|x86.ActiveCfg = Debug|x86
+		{07DA2BB9-75D4-43AA-8491-896A6F98C84F}.Debug|x86.Build.0 = Debug|x86
+		{07DA2BB9-75D4-43AA-8491-896A6F98C84F}.Release|Any CPU.ActiveCfg = Release|x86
+		{07DA2BB9-75D4-43AA-8491-896A6F98C84F}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{07DA2BB9-75D4-43AA-8491-896A6F98C84F}.Release|Mixed Platforms.Build.0 = Release|x86
+		{07DA2BB9-75D4-43AA-8491-896A6F98C84F}.Release|x86.ActiveCfg = Release|x86
+		{07DA2BB9-75D4-43AA-8491-896A6F98C84F}.Release|x86.Build.0 = Release|x86
+		{9AF3061E-5BDF-45C4-9460-627537DA7327}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{9AF3061E-5BDF-45C4-9460-627537DA7327}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{9AF3061E-5BDF-45C4-9460-627537DA7327}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{9AF3061E-5BDF-45C4-9460-627537DA7327}.Debug|x86.ActiveCfg = Debug|x86
+		{9AF3061E-5BDF-45C4-9460-627537DA7327}.Debug|x86.Build.0 = Debug|x86
+		{9AF3061E-5BDF-45C4-9460-627537DA7327}.Release|Any CPU.ActiveCfg = Release|x86
+		{9AF3061E-5BDF-45C4-9460-627537DA7327}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{9AF3061E-5BDF-45C4-9460-627537DA7327}.Release|Mixed Platforms.Build.0 = Release|x86
+		{9AF3061E-5BDF-45C4-9460-627537DA7327}.Release|x86.ActiveCfg = Release|x86
+		{9AF3061E-5BDF-45C4-9460-627537DA7327}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,12 @@
+﻿<Window x:Class="CMPUT302.Coordinate3"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Coordinate3" Height="600" Width="800">
+    <Grid>
+        <Image Name="videoImage"></Image>
+        <Canvas Background="Transparent">
+            <Button Content="Set Coordinate" HorizontalAlignment="Left" x:Name="btnsetTilt" Click="setCoordinate3Click" Width="200" Height="60" Canvas.Left="300" Canvas.Top="270"/>
+            <Rectangle Fill="Red" Height="50" Width="50" Name="target" Stroke="White" Canvas.Right="0" Canvas.Top="0"/>
+        </Canvas>
+    </Grid>
+</Window>

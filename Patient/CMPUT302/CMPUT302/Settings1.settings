@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CMPUT414" GeneratedClassName="Settings1">
+  <Profiles />
+  <Settings>
+    <Setting Name="Administrator" Type="System.String" Scope="User">
+      <Value Profile="(Default)">123456</Value>
+    </Setting>
+    <Setting Name="Patient" Type="System.String" Scope="User">
+      <Value Profile="(Default)">123</Value>
+    </Setting>
+    <Setting Name="Therapist" Type="System.String" Scope="User">
+      <Value Profile="(Default)">456</Value>
+    </Setting>
+    <Setting Name="PatientFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c:\patient</Value>
+    </Setting>
+    <Setting Name="Welcome" Type="System.String" Scope="User">
+      <Value Profile="(Default)">welcom2</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

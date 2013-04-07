@@ -1,0 +1,26 @@
+// Reading the preset game settings file:
+// each saved level has three lines
+// line 1: [name of level]
+// line 2: [1's and 0's for active/inactive tiles] [tile position %] [tile size %]
+// line 3: [yes/no continuous style level] [queue of tile indexes for continuous play]
+Game 1: close
+1 1 1 1 1 1 1 1 43 30
+no
+Game 2: far
+1 1 1 1 1 1 1 1 73 52
+no
+Game 3: mid-range
+1 1 1 1 1 1 1 1 55 20
+no
+Game 4: left
+0 0 0 1 1 1 1 1 50 35
+no
+Game 5: right
+1 1 1 1 0 0 0 1 50 35
+no
+Game 6: cross
+0 1 0 1 0 1 0 1 50 35
+no
+Game 7: DDR
+1 1 1 1 1 1 1 1 50 35
+yes 0 1 2 3 4 5 6 7
