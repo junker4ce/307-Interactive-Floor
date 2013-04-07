@@ -11,13 +11,13 @@ using System.Threading;
 using System.Runtime.InteropServices;
 
 
-namespace CMPUT414
+namespace CMPUT302
 {
     //Partially completed calibration class
     public partial class Coordinate1 : Window
     {
         KinectSensor sensor = KinectSensor.KinectSensors[0];
-        Tracker tracker;
+        CaliTracking tracker;
 
         public Coordinate1()
         {
@@ -41,7 +41,7 @@ namespace CMPUT414
             if (LeftFoot == null) { }
             else
             {
-                App.yaxis.max = MatrixMath.jointToPoint(LeftFoot);
+                tracker.yaxis.max = MatrixMath.jointToPoint(LeftFoot);
                 Coordinate2 coord2 = new Coordinate2(sensor, tracker);
                 Debug.WriteLine("click");
                 coord2.Show();

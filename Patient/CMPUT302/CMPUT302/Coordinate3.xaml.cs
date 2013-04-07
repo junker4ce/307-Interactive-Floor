@@ -17,35 +17,43 @@ namespace CMPUT302
     public partial class Coordinate3 : Window
     {
         KinectSensor sensor;
+        CaliTracking tracker;
 
-        public Coordinate3(KinectSensor sensor)
+        public Coordinate3(KinectSensor sensor, CaliTracking tracker)
         {
-            InitializeComponent();
             this.sensor = sensor;
-            this.Loaded += new RoutedEventHandler(Coordinate2_Loaded);
-            this.Unloaded += new RoutedEventHandler(Coordinate2_Unloaded);
+            this.tracker = tracker;
+            InitializeComponent();
+            this.WindowState = System.Windows.WindowState.Maximized;
+            this.Loaded += new RoutedEventHandler(Coordinate3_Loaded);
+            this.Unloaded += new RoutedEventHandler(Coordinate3_Unloaded);
         }
 
         private void setCoordinate3Click(object sender, RoutedEventArgs e)
         {
-            MainWindow main = new MainWindow();
-            Point YMax = new Point();
-            App.xaxis.zero = YMax;
-            App.yaxis.zero = YMax;
-            main.Show();
-            this.Close();
+            Joint RightFoot = App.mainSkeleton.Joints[JointType.FootRight];
+            if (RightFoot == null) { }
+            else
+            {
 
+                App.xaxis.max = MatrixMath.jointToPoint(RightFoot);
+                Debug.WriteLine("click");
+                MatrixMath.finalizeGrid();
+                this.Close();
+            }
         }
 
-        void Coordinate2_Unloaded(object sender, RoutedEventArgs e)
+        void Coordinate3_Unloaded(object sender, RoutedEventArgs e)
         {
-            sensor.Stop();
+            //sensor.Stop();
+            //sensor.SkeletonStream.Disable();
         }
 
-        void Coordinate2_Loaded(object sender, RoutedEventArgs e)
+        void Coordinate3_Loaded(object sender, RoutedEventArgs e)
         {
             //sensor.SkeletonFrameReady += runtime_SkeletonFrameReady;
-            sensor.Start();
+            //Tracker tracker = new Tracker(sensor);
+            //sensor.Start();
             //sensor.ElevationAngle = -5;
         }
     }

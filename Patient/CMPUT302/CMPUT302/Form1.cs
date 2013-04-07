@@ -31,9 +31,7 @@ namespace CMPUT302
         {
             //this.Hide();
             Coordinate1 calibration = new Coordinate1();
-            form2.Show();
             
-            f.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)

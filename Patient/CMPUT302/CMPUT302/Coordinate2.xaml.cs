@@ -18,36 +18,46 @@ namespace CMPUT302
     public partial class Coordinate2 : Window
     {
         KinectSensor sensor;
+        CaliTracking tracker;
 
-        public Coordinate2(KinectSensor sensor)
+        public Coordinate2(KinectSensor sensor, CaliTracking tracker)
         {
-            InitializeComponent();
             this.sensor = sensor;
+            this.tracker = tracker;
+            InitializeComponent();
+            this.WindowState = System.Windows.WindowState.Maximized;
             this.Loaded += new RoutedEventHandler(Coordinate2_Loaded);
             this.Unloaded += new RoutedEventHandler(Coordinate2_Unloaded);
         }
 
         private void setCoordinate2Click(object sender, RoutedEventArgs e)
         {
-            Coordinate3 coord3 = new Coordinate3(sensor);
-            Point zero = new Point();
-            App.xaxis.zero = zero;
-            App.yaxis.zero = zero;
-            coord3.Show();
-            this.Close();
+            Joint LeftFoot = App.mainSkeleton.Joints[JointType.FootLeft];
+            if (LeftFoot == null) { }
+            else
+            {
+                Point zero = MatrixMath.jointToPoint(LeftFoot);
+                Calibration.yaxis.zero = zero;
+                Calibration.xaxis.zero = zero;
+                Debug.WriteLine("click");
+                Coordinate3 coord3 = new Coordinate3(sensor, tracker);
+                coord3.Show();
+                this.Close();
+            }
 
         }
 
         void Coordinate2_Unloaded(object sender, RoutedEventArgs e)
         {
-            sensor.Stop();
+            //sensor.Stop();
         }
 
         void Coordinate2_Loaded(object sender, RoutedEventArgs e)
         {
-            //sensor.SkeletonFrameReady += runtime_SkeletonFrameReady;
-            sensor.Start();
-            //sensor.ElevationAngle = -5;
+            //Kinect.sensor.SkeletonFrameReady += runtime_SkeletonFrameReady;
+            //Tracker tracker = new Tracker(sensor);
+            //sensor.Start();
+            //sensor.ElevationAngle = 0;
         }
     }
 }

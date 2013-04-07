@@ -11,12 +11,8 @@ namespace CMPUT302
     {
         double distance;
         public Point zero;
-        public Point axisend;
+        public Point max;
 
-        public void calcDistance(Point otheraxis)
-        {
-
-        }
     }
 
 }
