@@ -11,42 +11,56 @@ using System.Threading;
 using System.Runtime.InteropServices;
 
 
-namespace CMPUT302
+namespace CMPUT414
 {
     //Partially completed calibration class
     public partial class Coordinate1 : Window
     {
-        KinectSensor sensor;
+        KinectSensor sensor = KinectSensor.KinectSensors[0];
+        Tracker tracker;
 
-        public Coordinate1(KinectSensor sensor)
+        public Coordinate1()
         {
             InitializeComponent();
-            this.sensor = sensor;
+            this.WindowState = System.Windows.WindowState.Maximized;
+            var smoothing = new TransformSmoothParameters
+            {
+                Smoothing = 0.2f,
+                Correction = 0.0f,
+                Prediction = 0.0f,
+                JitterRadius = 1.0f,
+                MaxDeviationRadius = 0.5f
+            };
             this.Loaded += new RoutedEventHandler(Coordinate1_Loaded);
             this.Unloaded += new RoutedEventHandler(Coordinate1_Unloaded);
         }
 
         private void setCoordinate1Click(object sender, RoutedEventArgs e)
         {
-            MainWindow main = new MainWindow();
-            Point YMax = new Point();
-            App.xaxis.zero = YMax;
-            App.yaxis.zero = YMax;
-            main.Show();
-            this.Close();
+            Joint LeftFoot = App.mainSkeleton.Joints[JointType.FootLeft];
+            if (LeftFoot == null) { }
+            else
+            {
+                App.yaxis.max = MatrixMath.jointToPoint(LeftFoot);
+                Coordinate2 coord2 = new Coordinate2(sensor, tracker);
+                Debug.WriteLine("click");
+                coord2.Show();
+                this.Close();
+            }
 
         }
 
         void Coordinate1_Unloaded(object sender, RoutedEventArgs e)
         {
-            sensor.Stop();
         }
 
         void Coordinate1_Loaded(object sender, RoutedEventArgs e)
         {
-            //sensor.SkeletonFrameReady += runtime_SkeletonFrameReady;
+            //Kinect.sensor.SkeletonFrameReady += runtime_SkeletonFrameReady;
+            App.donecal = false;
+            tracker = new Tracker(sensor);
             sensor.Start();
-            //sensor.ElevationAngle = -5;
+            //sensor.ElevationAngle = 0;
         }
     }
 }
