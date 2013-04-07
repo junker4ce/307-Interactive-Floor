@@ -28,7 +28,7 @@ namespace InteractiveFloorGame
         public string currentLvlName = "Blank";
         public string currentLvlData = "Blank";
         public string currentLvlQueue = "Blank";
-        public static string userLevelsPath = Application.UserAppDataPath + "\\userLevels.txt";
+        public static string userLevelsPath = Application.UserAppDataPath + "\\Interactive_floor_userLevels.txt";
         public static string presetLevelsLocation = "InteractiveFloorGame.Resources.PresetGameSettings.txt";
 
         public static int distancePercent =55;
@@ -57,7 +57,7 @@ namespace InteractiveFloorGame
             {"6","Upper left(7)"},
             {"7","Top(8)"},
         };
-        Dictionary<string, string> directionIndexes = new Dictionary<string, string>
+        Dictionary<string, string> directionsRevDict = new Dictionary<string, string>
         {
             {"Upper right(1)","0"},
             {"Right(2)","1"},
@@ -73,6 +73,11 @@ namespace InteractiveFloorGame
         public ControlForm()
         {
             InitializeComponent();
+
+            //for (int i = 0; i < 8; i++)
+            //{
+            //    directionsRevDict.Add(directions[i]);
+            //}
 
             buttons = new Button[8] { square1, button2, button3, button4, button5, button6, button7, button8 };
             for (int i = 0; i < 8; i++)
@@ -731,7 +736,7 @@ namespace InteractiveFloorGame
                 result = "yes";
                 foreach (string direction in continuousList.Items)
                 {
-                    result = result + " " + directionIndexes[direction];
+                    result = result + " " + directionsRevDict[direction];
                 }
             }
             return result;

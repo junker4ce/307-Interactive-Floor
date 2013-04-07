@@ -426,10 +426,10 @@
             this.outOf,
             this.time,
             this.foot});
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 71);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(383, 329);
+            this.dataGridView1.Size = new System.Drawing.Size(383, 258);
             this.dataGridView1.TabIndex = 3;
             // 
             // colGameNumber
@@ -485,8 +485,8 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.patientTab);
             this.tabControl1.Controls.Add(this.S);
+            this.tabControl1.Controls.Add(this.patientTab);
             this.tabControl1.Location = new System.Drawing.Point(12, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
