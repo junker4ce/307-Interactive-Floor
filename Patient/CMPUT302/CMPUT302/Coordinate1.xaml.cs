@@ -17,7 +17,7 @@ namespace CMPUT302
     public partial class Coordinate1 : Window
     {
         KinectSensor sensor = KinectSensor.KinectSensors[0];
-        CaliTracking tracker;
+        CaliTracking tracker = new CaliTracking();
 
         public Coordinate1()
         {
@@ -37,11 +37,11 @@ namespace CMPUT302
 
         private void setCoordinate1Click(object sender, RoutedEventArgs e)
         {
-            Joint LeftFoot = App.mainSkeleton.Joints[JointType.FootLeft];
+            Joint LeftFoot = Calibration.mainSkeleton.Joints[JointType.FootLeft];
             if (LeftFoot == null) { }
             else
             {
-                tracker.yaxis.max = MatrixMath.jointToPoint(LeftFoot);
+                Calibration.yaxis.max = MatrixMath.jointToPoint(LeftFoot);
                 Coordinate2 coord2 = new Coordinate2(sensor, tracker);
                 Debug.WriteLine("click");
                 coord2.Show();
@@ -57,8 +57,6 @@ namespace CMPUT302
         void Coordinate1_Loaded(object sender, RoutedEventArgs e)
         {
             //Kinect.sensor.SkeletonFrameReady += runtime_SkeletonFrameReady;
-            App.donecal = false;
-            tracker = new Tracker(sensor);
             sensor.Start();
             //sensor.ElevationAngle = 0;
         }

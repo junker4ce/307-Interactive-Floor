@@ -7,12 +7,12 @@ using Microsoft.Kinect;
 
 namespace CMPUT302
 {
-    class CaliTracking
+    public class CaliTracking
     {
         public Skeleton[] skeletons = null;
         public MainWindow MWindow;
         public Tuple<float, float, float, float> FloorClipPlane { get; private set; }
-        KinectSensor sensor = new KinectSensor();
+        KinectSensor sensor = KinectSensor.KinectSensors[0];
 
         public CaliTracking()
         {
@@ -53,11 +53,8 @@ namespace CMPUT302
                     {
                         // Obtain the left knee joint; if tracked, print its position
 
-
-                        if (App.donecal == true)
-
                       
-                       App.mainSkeleton = skeleton;
+                       Calibration.mainSkeleton = skeleton;
                        Debug.WriteLine(skeleton.Joints[JointType.FootLeft].Position.X + " " + skeleton.Joints[JointType.FootLeft].Position.Y + " " + skeleton.Joints[JointType.FootLeft].Position.Z);
                     }
                 }

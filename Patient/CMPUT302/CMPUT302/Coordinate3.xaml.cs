@@ -31,14 +31,14 @@ namespace CMPUT302
 
         private void setCoordinate3Click(object sender, RoutedEventArgs e)
         {
-            Joint RightFoot = App.mainSkeleton.Joints[JointType.FootRight];
+            Joint RightFoot = Calibration.mainSkeleton.Joints[JointType.FootRight];
             if (RightFoot == null) { }
             else
             {
 
-                App.xaxis.max = MatrixMath.jointToPoint(RightFoot);
+                //App.xaxis.max = MatrixMath.jointToPoint(RightFoot);
                 Debug.WriteLine("click");
-                MatrixMath.finalizeGrid();
+                //MatrixMath.finalizeGrid();
                 this.Close();
             }
         }
@@ -47,6 +47,7 @@ namespace CMPUT302
         {
             //sensor.Stop();
             //sensor.SkeletonStream.Disable();
+            Calibration.store();
         }
 
         void Coordinate3_Loaded(object sender, RoutedEventArgs e)

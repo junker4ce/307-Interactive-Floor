@@ -9,8 +9,8 @@ namespace CMPUT302
     public class Point 
     {
         public double x;
-        static double y;
-        static double z;
+        public double y;
+        public double z;
     }
     
 }
