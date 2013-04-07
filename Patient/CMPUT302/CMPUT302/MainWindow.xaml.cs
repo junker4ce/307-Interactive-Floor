@@ -13,16 +13,12 @@ using System.Threading;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Forms.PropertyGridInternal;
-using InteractiveFloorGame;
-using System.Windows.Input;
-using System.Windows.Threading;
 
 
-namespace CMPUT302
+namespace CMPUT414
 {
     public partial class MainWindow : Window
     {
-
         //Instantiate the Kinect runtime. Required to initialize the device.
         //IMPORTANT NOTE: You can pass the device ID here, in case more than one Kinect device is connected.
         KinectSensor sensor = KinectSensor.KinectSensors[0];
@@ -31,6 +27,7 @@ namespace CMPUT302
         public Tuple<float, float, float, float> FloorClipPlane { get; private set; }
         Position LeftFoot = new Position();
         [DllImport ("user32")]
+
     public static extern int SetCursorPos (int x , int y); //It draws the cursor postion
             private const int MOUSEEVENTF_MOVE=0x0001;
             private const int MOUSEEVENTF_LEFTDOWN=0x0002;
@@ -51,10 +48,6 @@ namespace CMPUT302
             private float zPrcnt = .01f;
             private float diffX = 0.0f;
             private float diffZ = 0.0f;
-            private Caliberation cal = new Caliberation();
-            public int Cx = 0;
-            public int Cy = 0;
-            public int Cz = 0;
 
             
            
@@ -63,10 +56,7 @@ namespace CMPUT302
         public static extern void mouse_event(int dwFlags,int dx,int dy , int cButtons,int dwExtraInfo);
         public MainWindow()
         {
-
-           
-           InitializeComponent();
-           this.Hide();
+            InitializeComponent();
             var smoothing = new TransformSmoothParameters
             {
                 Smoothing = 0.2f,
@@ -75,34 +65,33 @@ namespace CMPUT302
                 JitterRadius = 1.0f,
                 MaxDeviationRadius = 0.5f
             };
-           
-            //Runtime initialization is handled when the window is opened. When the window
-           // this.WindowState =  System.Windows.WindowState.Maximized;//Maximazes the Window
-            Form1 f0 = new Form1();
-            f0.WindowState = FormWindowState.Maximized; ;
-            f0.Show();
-            Screen_Width = Convert.ToInt32(System.Windows.SystemParameters.WorkArea.Width);
-            Screen_Height = Convert.ToInt32(System.Windows.SystemParameters.WorkArea.Height);
 
+            //Runtime initialization is handled when the window is opened. When the window
+            this.WindowState =  System.Windows.WindowState.Maximized;//Maximazes the Window
+            
+            Screen_Width  =Convert.ToInt32(System.Windows.SystemParameters.PrimaryScreenWidth);
+            Screen_Height = Convert.ToInt32(System.Windows.SystemParameters.PrimaryScreenHeight);
             LeftFoot.setX(0);
             LeftFoot.setZ(0);
             Half_Screen_Width = Screen_Width/2;
             Half_Screen_Height = Screen_Height/2;
-            cal.WinCord(Half_Screen_Width, Half_Screen_Height);
-           
+            ScreenW.Text = Convert.ToString(Half_Screen_Width);
+            ScreenH.Text = Convert.ToString(Half_Screen_Height);
             SetCursorPos(Half_Screen_Width,Half_Screen_Height);//To set the Cursor at the Build time at the center of the Screen
             //is closed, the runtime MUST be unitialized.
-            this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
-            this.Unloaded += new RoutedEventHandler(MainWindow_Unloaded);
-            sensor.ColorStream.Enable();
-            sensor.SkeletonStream.Enable(smoothing);//Uses the Smoothing Param.
-          
-           
-              }
-        
-     
+            //this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
+            //this.Unloaded += new RoutedEventHandler(MainWindow_Unloaded);
+            //sensor.ColorStream.Enable();
+            //sensor.SkeletonStream.Enable(smoothing);//Uses the Smoothing Param.
+            VX.Text = "";
+            VY.Text = "";
+            VZ.Text = "";
+            buttonText.Text= "";
+            
+            
+        }
+
        
-      
         //Mouse click function takes the current x and y of the mouse and preforms a click on the current postion 
         private void Mouseclick(int X,int Y)
         {
@@ -116,7 +105,8 @@ namespace CMPUT302
           private void ProcessGesture(Joint FootLeft)
           {
               Microsoft.Kinect.SkeletonPoint vector = new Microsoft.Kinect.SkeletonPoint();
-            
+             // if (cntr == 30) //This slows downs the number of readings,in order to control the mouse flicking
+            // {
                   // Note that the X & Y represents the vertical plane of the sensor
                   // Z represents the depth or the prependicular distance from the sensor plan
               Joint LeftStore = FootLeft;
@@ -126,12 +116,9 @@ namespace CMPUT302
                   vector.Z = FootLeft.Position.Z; ///Gets the Feet postion Z-axis in meters (depth: Patient distance from Sensor)
                   vector.Y = FootLeft.Position.Y; //Gets the Feet postion  Y-axis in meters
                   FootLeft.Position = vector;
-                
-                  /*
                   VX.Text = Convert.ToString(Math.Round(FootLeft.Position.X, 3));//Prints it on the patient screen
                   VY.Text = Convert.ToString(Math.Round(FootLeft.Position.Y, 3));//Prints it on the patient screen
                   VZ.Text = Convert.ToString(Math.Round(FootLeft.Position.Z, 3));//Prints it on the patient screen
-                  */
                   vector.X = ScaleX(vector.X); //Sends the postion to the scale function to be able //please check the function comments
                   vector.Z = ScaleZ(vector.Z); // same as before 
                   vector.Y = ScaleZ(vector.Y); // same as before
@@ -147,19 +134,9 @@ namespace CMPUT302
                   CursorX = Convert.ToInt32(vector.X);//convert the float points 32 bit signed integear 
                   CursorZ = Convert.ToInt32(vector.Z);
                   CursorY = -1 * Convert.ToInt32(vector.Y);
-                  cal.setX(FootLeft.Position.X);
-                  cal.setZ(FootLeft.Position.Z);
-                //  cal.Counter();
-                 // cal.WinCord(CursorX, CursorY);
-                  Cx = CursorX;
-                  Cz = CursorY;
-                  Cz = CursorZ;
-                  SetCursorPos(CursorX, CursorZ);
-                  /*
                   ScreenW.Text = Convert.ToString(CursorX);
                   ScreenH.Text = Convert.ToString(CursorZ);
                   SetCursorPos(CursorX, CursorZ);
-                  */
                   pX = vector.X;//Store old positions for smotthing 
                   pZ = vector.Z;//Store old positions for smotthing 
                   pY = vector.Y;//Store old positions for smotthing 
@@ -169,7 +146,7 @@ namespace CMPUT302
 
 
                   //These below controls the circles which indicates the postions of patient if its too noear or far
-                 /* if (MatrixMath.FootToFloor(FloorClipPlane, LeftStore) && !LeftFoot.SamePosition(LeftStore))
+                  if (MatrixMath.FootToFloor(FloorClipPlane, LeftStore) && !LeftFoot.SamePosition(LeftStore))
                   {
                       Mouseclick(CursorX, CursorZ);
                       LeftFoot.setX(LeftStore.Position.X);
@@ -179,26 +156,28 @@ namespace CMPUT302
                   }
                   if (vector.Z < 265)
                   {
-                      cal.RedSignalStatus(1);
-                      cal.YellowSignalStatus(0);
-                      cal.GreenSignalStatus(0);
-                     
+                      redsignal.Visibility = Visibility.Visible;
+                      yellowsignal.Visibility = Visibility.Collapsed;
+                      greensignal.Visibility = Visibility.Collapsed;
+
                   }
                   if (vector.Z > 265 & vector.Z < 435)
                   {
-                      cal.RedSignalStatus(0);
-                      cal.YellowSignalStatus(1);
-                      cal.GreenSignalStatus(0);
-                    
+                      redsignal.Visibility = Visibility.Collapsed;
+                      yellowsignal.Visibility = Visibility.Visible;
+                      greensignal.Visibility = Visibility.Collapsed;
+
                   }
                   if (vector.Z > 435)
                   {
-                      cal.RedSignalStatus(0);
-                      cal.YellowSignalStatus(0);
-                      cal.GreenSignalStatus(1);
-                      
-                  }*/
-             
+                      redsignal.Visibility = Visibility.Collapsed;
+                      yellowsignal.Visibility = Visibility.Collapsed;
+                      greensignal.Visibility = Visibility.Visible;
+
+                  }
+               // cntr = 0;
+            //  }
+                  //    cntr += 1;
                   
               
           }
@@ -259,7 +238,7 @@ namespace CMPUT302
            return value;
        }
 
-        
+
         void MainWindow_Unloaded(object sender, RoutedEventArgs e)
         {
             sensor.Stop();
@@ -271,7 +250,27 @@ namespace CMPUT302
             sensor.Start();
         }
 
-        
+        private void WhereIam_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void noButton_Click(object sender, RoutedEventArgs e)
+        {
+            buttonText.Text = "No";
+            
+        }
+
+        private void yesB_Click(object sender, RoutedEventArgs e)
+        {
+            buttonText.Text = "Yes";
+           
+        }
+
+        private void buttonText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
 
        
 
