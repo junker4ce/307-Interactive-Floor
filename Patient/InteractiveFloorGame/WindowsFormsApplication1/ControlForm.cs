@@ -13,6 +13,7 @@ using System.Collections.ObjectModel;
 using InteractiveFloorGame;
 
 
+
 namespace InteractiveFloorGame
 {
     public partial class ControlForm : Form
@@ -353,8 +354,13 @@ namespace InteractiveFloorGame
             sizeDigits.Text = size.ToString();
         }
 
+        private void Tracking()
+        {
+        }
+
         private void play_button_Click(object sender, EventArgs e)
         {
+            
             string[] queue = generate_queue_string().Split(' ');
             // set up tiles for gameplay
             for (int i = 0; i < 8; i++)
